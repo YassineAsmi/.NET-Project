@@ -1,0 +1,40 @@
+﻿@model WebProject.Models.order_product
+
+<h1>Product Details</h1>
+<form method="post">
+    <div class="row">
+        <div class="col-4">
+            <img src="@Model.product.image" class="img-fluid" />
+            <input type="hidden" asp-for="productid" />
+        </div>
+        <div class="col-8">
+            <div class="row">
+                <div class="col-12">
+                    <label asp-for="product.name">Product Name:</label>
+                    <span>@Model.product.name</span>
+                </div>
+                <div class="col-12">
+                    <label asp-for="product.description">Product Description:</label>
+                    <span>@Model.product.description</span>
+                </div>
+                <div class="col-12">
+                    <label asp-for="product.price">Product Price:</label>
+                    <span>@Model.product.price Dt</span>
+
+                </div>
+                <div class="col-12">
+                    <label asp-for="quantity">Quantity:</label>
+                    <input asp-for="quantity" class="form-control" />
+                    <span asp-validation-for="quantity" class="text-danger"></span>
+
+                    </a>
+                </div>
+            </div>
+            <div class="form-control">
+                <a class="btn btn-outline-light" asp-area="customer" asp-action="Index" asp-controller="home">Back to List</a>
+                <a class="btn btn-danger" asp-area="customer" asp-action="AddToCart" asp-controller="orderProduct" asp-route-productId="@Model.productid" asp-route-quantity="@Model.quantity">Add to Cart</a>
+            </div>
+        </div>
+    </div>
+</form>
+

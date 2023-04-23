@@ -1,0 +1,81 @@
+﻿@model IEnumerable<WebProject.Models.product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Product List</h1>
+
+<p>
+    <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("Create")'">Create New</button>
+</p>
+<table class="table">
+    <thead>
+        <tr class="table-primary">
+            <th>
+                @Html.DisplayNameFor(model => model.image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            <tr class="table-active">
+                <td>
+                    <img src="@item.image" alt="@item.name" style="max-width:50px" />
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+
+            <td>
+                    <button type="button" class="btn btn-secondary" onclick="location.href='@Url.Action("Edit", new { id = item.productid })'">Edit</button> |
+                    <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("Details", new { id = item.productid })'">Details</button> |
+                    <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Delete", new { id = item.productid })'">Delete</button>
+                     
+@*
+                    <script>
+                        function deleteProduct(productId) {
+                            Swal.fire({
+                                title: 'Confirmation!',
+                                text: 'Do you want to continue?',
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonText: 'Yes',
+                                cancelButtonText: 'No'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.href = '@Url.Action("Delete", "Products")' + '?id=' + productId;
+                                }
+                            });
+                        }
+                    </script>
+
+                *@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
