@@ -1,0 +1,71 @@
+﻿@model WebProject.Models.OrderDetailsViewModel
+@{
+    ViewData["Title"] = "Order Details";
+}
+@{
+    double total = 0;
+}
+<h1>Order Details</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card text-white bg-light mb-3">
+                <div class="card-header">
+                    <h3> Shipping Informations</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-title">Name: <b>@Model.OrderDetail.Name</b </p>
+                    <p class="card-text">Address: <b> @Model.OrderDetail.Address</b></p>
+                    <p class="card-text">Contact: <b>@Model.OrderDetail.PhoneNumber</b> </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-header">
+                    <h3>Order Informations</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-title">Order Number: <b>@Model.OrderDetail.orderid</b> </p>
+                    <p class="card-text">Total: <b> @string.Format("{0:0.00}", Model.OrderDetail.total) Dt</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Ordered Products</h2>
+                <table class="table table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Sub Total</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-dark">
+                        @foreach (var orderedProduct in Model.OrderedProducts)
+                        {
+                            double subTotal = orderedProduct.product.price * orderedProduct.quantity;
+                            total += subTotal;
+                            <tr>
+                                <td>@orderedProduct.product.name</td>
+                                <td>@string.Format("{0:0.000}", orderedProduct.product.price) Dt</td>
+                                <td>@orderedProduct.quantity</td>
+                                <td>@string.Format("{0:0.000}", subTotal) Dt</td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot class="table-light">
+                        <tr>
+                            <td colspan="3" class="text-right font-weight-bold">Total:</td>
+                            <td><b>@string.Format("{0:0.000}", total) Dt</b></td>
+                        </tr>
+                    </tfoot>
+                </table>
+        </div>
+    </div>
+</div>
+

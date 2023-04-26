@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<user> SignInManager
+@inject UserManager<user> UserManager
+
+<ul class="nav nav-tabs">
+@if (SignInManager.IsSignedIn(User))
+{
+            <li class="nav-item dropdown" >
+            <a class="nav-link dropdown-toggle" id="manage" class="nav-link text-dark" title="Manage" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Hello<b> @UserManager.GetUserName(User)! </b></a>
+                <div class="dropdown-menu" style="">
+                <a class="dropdown-item" class="nav-link text-dark" asp-area="Customer" asp-action="Index" asp-controller="orders">My Orders</a>
+                    </div>
+            </li>
+    
+    <li class="nav-item">
+        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button class ="btn btn-primary" id="logout" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+        </form>
+    </li>
+}
+else
+{
+        <li class="nav-item">
+            <a class="btn btn-secondary my-2 me-2 my-sm-0 mx-1" id="register" asp-area="Identity" asp-page="/Account/Register" style="margin-right: 8px;">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="btn btn-primary my-2 my-sm-0" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+
+}
+</ul>

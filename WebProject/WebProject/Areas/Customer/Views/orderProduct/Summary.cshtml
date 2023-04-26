@@ -1,0 +1,102 @@
+﻿<h1>Summary</h1>
+@model WebProject.Models.CartVM
+@{
+    ViewData["Title"] = "Summary";
+}
+
+
+
+    <div class="col-md-16 mb-6">
+        <div class="card border-primary mb-4">
+            <div class="card-header py-2">
+                <h5 class="mb-0">Shipping details</h5>
+            </div>
+            <div class="card-body">
+                <!-- Shipping details content -->
+                <form method="post">
+                    <div class="row">
+                        <div class="col-md-12 mb-6">
+                            <div class="card text-white bg-dark mb-3 ">
+
+                                <div class="card-body">
+                                    <div class="row mb-4">
+                                        <div class="col">
+                                            <div class="form-outline">
+                                                <div class="d-flex align-items-center ">
+                                                    <label class="form-label "><b>Name: </b></label>
+                                                    <input type="text" value="@Model.OrderDetail.Name" class="form-control ms-3" disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col">
+                                            <div class="form-outline">
+                                                <div class="d-flex align-items-center ">
+                                                    <label class="form-label "><b>Phone: </b></label>
+                                                    <input type="text" value="@Model.OrderDetail.PhoneNumber" class="form-control ms-3" disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col">
+                                            <div class="form-outline">
+                                                <div class="d-flex align-items-center me-1">
+                                                    <label class="form-label me-2"><b>Address: </b></label>
+                                                    <textarea rows="3" class="form-control" disabled>@Model.OrderDetail.Address</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+     </div>
+<form method="post" asp-controller="orderProduct" asp-action="OrderSuccess">
+    <div class="col-md-16">
+        <div class="card border-primary mb-3">
+            <div class="card-header py-3">
+                <h5 class="mb-0">Order Summary</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ListCart)
+                        {
+                            <tr>
+                                <td><b><img src="@item.product.image" width="100px" height="100px"></img> </b></td>
+                                <td class="table-active"><b class="badge bg-info">@item.product.name</b></td>
+                                <td class="table-active"><span class="badge bg-danger">@(item.product.price * item.quantity) Dt</span></td>
+                                <td class="table-active"> <span class="badge bg-warning rounded-pill">@item.quantity</span></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <h4>Total:</h4>
+                    <h4 class="text-light">@Model.OrderDetail.total Dt</h4>
+                </div>
+                <div class="d-grid mt-3">
+                    <button type="submit" class="btn btn-success">Proceed to Pay</button>
+                </div>
+            </div>
+        </div>
+
+       
+    </div>
+</form>
+
+

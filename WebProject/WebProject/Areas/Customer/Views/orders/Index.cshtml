@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WebProject.Models.order>
+@{
+    ViewData["Title"] = "Orders";
+}
+@{
+    int pageNumber = ViewBag.PageNumber;
+    int pageSize = ViewBag.PageSize;
+    int totalPages = ViewBag.TotalPages;
+}
+<h1>Orders</h1>
+
+<div class="container">
+    <div class="row pb-4">
+        <div class="col-md-12">
+            <ul class="list-group">
+                @foreach (var item in Model)
+                {
+                    <li class="list-group-item mb-2">
+                        <div class="card text-white bg-dark mb-3">
+                            <div class="card-header">Order ID: @item.orderid</div>
+                            <div class="card-body">
+                                <h4 class="card-title">Total: @string.Format("{0:0.000}", item.total ?? 0) Dt</h4>
+
+                                <p class="card-text">Order Date: @item.date_order?.ToString("dd/MM/yyyy")</p>
+                                <p class="card-text">Status: @item.status</p>
+                                <p class="card-text">Payment Status: @item.payment_status</p>
+                                <a asp-action="OrderDetails" class="btn btn-primary" asp-route-orderId="@item.orderid">Details</a>
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>
+            <nav aria-label="pagination pagination-lg">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item @(pageNumber == 1 ? "disabled" : "")">
+                        <a class="page-link" asp-action="Index" asp-route-pageNumber="@(pageNumber - 1)">Previous</a>
+                    </li>
+                    @for (int i = 1; i <= totalPages; i++)
+                    {
+                        <li class="page-item @(i == pageNumber ? "active" : "")">
+                            <a class="page-link" asp-action="Index" asp-route-pageNumber="@i">@i</a>
+                        </li>
+                    }
+                    <li class="page-item @(pageNumber == totalPages ? "disabled" : "")">
+                        <a class="page-link" asp-action="Index" asp-route-pageNumber="@(pageNumber + 1)">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

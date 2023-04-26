@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h1 style="margin-bottom: 16px;margin-top: 16px;" class="d-flex justify-content-center">Dashboard</h1>
+<div class="row d-flex justify-content-center">
+<div class="col-md-4 ">
+    <div class="card text-white bg-primary mb-3">
+            <div class="card-header"><i class="fas fa-user-plus"></i> Total Users</div>
+        <div class="card-body">
+            <h4 class="card-title">@ViewBag.TotalUsers</h4>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-4">
+    <div class="card text-white bg-success mb-3">
+            <div class="card-header"><i class="fas fa-shopping-cart"></i> Total Products</div>
+        <div class="card-body">
+            <h4 class="card-title">@ViewBag.TotalProducts</h4>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-4">
+    <div class="card text-white bg-warning mb-3">
+            <div class="card-header"> <i class="fas fa-box-open"></i> Total Orders</div>
+        <div class="card-body">
+            <h4 class="card-title">@ViewBag.TotalOrders</h4>
+        </div>
+    </div>
+</div>
+    <div class="col-md-4">
+        <div class="card text-white bg-info mb-3">
+            <div class="card-header"> <i class="fa-sharp fa-solid fa-sort fa-beat-fade"></i>    Orders This Month</div>
+            <div class="card-body">
+                <h4 class="card-title">@ViewBag.OrdersThisMonth</h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card text-white bg-danger mb-3">
+            <div class="card-header"><i class="fa-solid fa-bag-shopping fa-bounce"></i>  Most Ordered Product</div>
+            <div class="card-body">
+                <h4 class="card-title d-flex justify-content-center" >@ViewBag.MostOrderedProductName</h4>
+                <h4 class="card-title d-flex justify-content-center">Quantity: @ViewBag.MostOrderedProductQuantity</h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-dark mb-3">
+            <div class="card-header">
+                <i class="fa-solid fa-sack-dollar fa-bounce"></i>  Total Earned Money This Month
+            </div>
+            <div class="card-body">
+                <h4 class="card-title d-flex justify-content-center">
+                    @ViewBag.TotalEarnedThisMonth Dt
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
