@@ -1,0 +1,16 @@
+﻿@model WebProject.Models.OrderDetailsViewModel
+@{
+    ViewData["Title"] = "Order Success";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <img src="~/images/ORDERSUCC.png" alt="Order success" />
+            <h1 class="display-4">Order Successfully Placed!</h1>
+            <p class="lead">Thank you for your purchase. Your order has been placed successfully.</p>
+            <a class="btn btn-primary" asp-area="customer" asp-action="Index" asp-controller="Home">Back to Home</a>
+            <a asp-area="customer" asp-action="DownloadInvoice" asp-controller="orderProduct" asp-route-orderId="@Model.OrderDetail.orderid" class="btn btn-secondary">Download Invoice</a>
+        </div>
+    </div>
+</div>

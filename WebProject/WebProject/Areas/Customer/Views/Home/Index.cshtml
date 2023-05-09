@@ -1,0 +1,32 @@
+﻿@model IEnumerable<WebProject.Models.product>
+@{
+    ViewData["Title"] = "Home";
+}
+<form asp-action="Index" asp-controller="Home" method="get" class="d-flex me-3 mt-2">
+    <input name="searchQuery" class="form-control me-sm-2" type="search" placeholder="Search">
+    <button class="btn btn-info" class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+</form>
+<div class="row pb-4 d-flex justify-content-center">
+    @foreach (var item in Model)
+    {
+        <div class="card m-2" style="width: 18rem;">
+            <img class="card-img-top" src="@item.image" alt="Card image cap">
+            <div class="card-body">
+                <h6 class="card-title">@item.name</h6>
+                <h3 class="card-text"> <b class="text-danger"> @item.price.ToString("0.000") Dt</b> </h3>
+                <p class="card-text">
+                    @if (item.quantity == 0)
+                    {
+                        <h3 class="text-danger">Out of stock</h3>
+                    }
+                    else
+                    {
+                        <h3 class="text-success">Available</h3>
+                    }
+                </p>
+                <a asp-action="Details" class="btn btn-warning" asp-route-productId="@item.productid" class="btn btn-outline-primary">Details</a>
+            </div>
+        </div>
+
+    }
+</div>

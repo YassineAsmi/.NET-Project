@@ -1,0 +1,56 @@
+﻿@model WebProject.Models.order_product
+
+<h1> </h1>
+<form method="post" asp-area="customer" asp-action="AddToCart" asp-controller="orderProduct" asp-route-productId="@Model.productid">
+    <div class="row">
+        <div class="col-4">
+            <img src="@Model.product.image" class="img-fluid" />
+            <input type="hidden" asp-for="productid" />
+        </div>
+        <div class="col-8">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="text-info">@Model.product.name</h3>
+                </div>
+
+                <div class="col-12">
+                    <span class="text-light">@Model.product.description</span>
+                </div>
+                <form method="post" asp-area="customer" asp-action="AddToCart" asp-controller="orderProduct" asp-route-productId="@Model.productid">
+                    <div class="form-group">
+                        <h4 class="text-light">Quantity left in stock: @Model.product.quantity</h4>
+                        <input asp-for="quantity" class="form-control" min="1" max="@Model.product.quantity" required />
+                        <span asp-validation-for="quantity" class="text-danger"></span>
+                    </div>
+                    <div class="col-12">
+                        <h1 class="text-warning">@Model.product.price Dt</h1>
+                    </div>
+                    <div class="col-12">
+                        @if (Model.product.Available)
+                        {
+                            <h3 class="text-success">Available</h3>
+                        }
+                        else
+                        {
+                            <h3 class="text-danger">Out of stock</h3>
+                        }
+                        <br />
+                    </div>
+                    <div class="form-control">
+                        <a class="btn btn-outline-light" asp-area="customer" asp-action="Index" asp-controller="home">Back to List</a>
+                        @if (Model.product.Available)
+                        {
+                            <button class="btn btn-success" type="submit">Add to Cart</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-success" type="submit" disabled>Add to Cart</button>
+                        }
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</form>
+
